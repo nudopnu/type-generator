@@ -15,9 +15,9 @@ export default (config: Configuration) => {
       test: /\.css$/,
       use: ['style-loader', 'css-loader'],
     },
-    { 
+    {
       test: /\.ttf$/,
-      type: 'asset/resource'
+      type: 'asset/resource',
     }
   );
   return config;

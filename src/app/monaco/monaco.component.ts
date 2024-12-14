@@ -5,13 +5,14 @@ import { AfterViewInit, Component, ElementRef, viewChild } from '@angular/core';
   selector: 'app-monaco',
   standalone: true,
   imports: [],
-  template: ` <div style="height:100%" #editorContainer></div> `,
+  template: `<div style="height:100%; width: 100%;" #editorContainer></div>`,
 })
 export class MonacoComponent implements AfterViewInit {
   editorContainer =
     viewChild.required<ElementRef<HTMLElement>>('editorContainer');
 
   ngAfterViewInit(): void {
+    this.editorContainer().nativeElement.parentElement!.style.display = "contents";
     // validation settings
     monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
       noSemanticValidation: true,
@@ -40,21 +41,21 @@ export class MonacoComponent implements AfterViewInit {
     );
     // When resolving definitions and references, the editor will try to use created models.
     // Creating a model for the library allows "peek definition/references" commands to work with the library.
-    monaco.editor.createModel(
-      libSource,
-      'typescript',
-      monaco.Uri.parse(libUri)
-    );
+    // monaco.editor.createModel(
+    //   libSource,
+    //   'typescript',
+    //   monaco.Uri.parse(libUri)
+    // );
 
     var jsCode = [
       '"use strict";',
-      "",
-      "class Chuck {",
-      "    greet() {",
-      "        return Facts.next();",
-      "    }",
-      "}",
-    ].join("\n");
+      '',
+      'class Chuck {',
+      '    greet() {',
+      '        return Facts.next();',
+      '    }',
+      '}',
+    ].join('\n');
 
     monaco.editor.create(this.editorContainer().nativeElement, {
       value: jsCode,
