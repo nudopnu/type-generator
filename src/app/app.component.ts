@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MonacoComponent } from "./monaco/monaco.component";
+import { MonacoComponent } from './monaco/monaco.component';
+import { JSONSchema7 } from 'json-schema';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,14 @@ import { MonacoComponent } from "./monaco/monaco.component";
 })
 export class AppComponent {
   title = 'type-generator';
+  constructor() {
+    const schema: JSONSchema7 = {
+      type: 'object',
+      properties: {
+        test: {
+          type: 'string',
+        },
+      },
+    };
+  }
 }
