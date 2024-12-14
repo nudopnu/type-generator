@@ -2,7 +2,9 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import {
   AfterViewInit,
   Component,
+  effect,
   ElementRef,
+  input,
   model,
   viewChild,
 } from '@angular/core';
@@ -18,9 +20,20 @@ let tmp = true;
 export class MonacoComponent implements AfterViewInit {
   editorContainer =
     viewChild.required<ElementRef<HTMLElement>>('editorContainer');
-
+  language = input('typescript');
+  readOnly = input(false);
   code = model('');
   editor?: monaco.editor.IStandaloneCodeEditor;
+
+  constructor() {
+    effect(() => {
+      const code = this.code();
+      if (!this.editor || this.editor.getModel()?.getValue() === code) {
+        return;
+      }
+      this.editor.getModel()?.setValue(code);
+    });
+  }
 
   ngAfterViewInit(): void {
     this.editorContainer().nativeElement.parentElement!.style.display =
@@ -38,14 +51,13 @@ export class MonacoComponent implements AfterViewInit {
     });
 
     // extra libraries
-    const libSource = `
-declare module tags {
+    const libSource = `declare module tags {
   /**
    * Represents a specific numeric type.
    * @template T - The type of numeric value, such as 'int32', 'uint64', or 'double'.
    */
   type Type<
-    T extends 'int32' | 'uint32' | 'uint64' | 'int64' | 'float' | 'double'
+    T extends 'int8' | 'int16' | 'int32' | 'int64' | 'uint8' | 'uint16' | 'uint32' | 'uint64' | 'float32' | 'float64'
   > = {
     __type?: T;
   };
@@ -181,6 +193,7 @@ declare module tags {
       | 'rgb'
       | 'rgba'
       | 'ripemd128'
+      | 'ripemd160'
       | 'semver'
       | 'sha256'
       | 'sha384'
@@ -240,7 +253,7 @@ declare module tags {
     __unique: true;
   };
 }
-    `;
+`;
     var libUri = 'ts:filename/facts.d.ts';
     monaco.languages.typescript.javascriptDefaults.addExtraLib(
       libSource,
@@ -262,10 +275,12 @@ declare module tags {
       theme: 'vs-dark',
       wordWrap: 'on',
       wrappingIndent: 'indent',
-      language: 'typescript',
+      language: this.language(),
+      readOnly: this.readOnly(),
       automaticLayout: true,
     });
     this.editor.onDidChangeModelContent((_) => {
+      console.log('CHANGE');
       this.code.set(this.editor!.getModel()!.getValue());
     });
   }

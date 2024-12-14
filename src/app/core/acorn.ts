@@ -15,8 +15,6 @@ export function parseTS(ts: string) {
     ecmaVersion: 'latest',
     locations: true,
   }) as TSProgram;
-  console.log('simplified', simplify(node));
-
   return node.body
     .filter((node) => node.type === 'TSInterfaceDeclaration')
     .map(toInterfaceDefinition)[0];

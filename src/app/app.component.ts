@@ -1,4 +1,4 @@
-import { Component, effect, model } from '@angular/core';
+import { Component, computed, effect, model } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MonacoComponent } from './monaco/monaco.component';
 import { JSONSchema7 } from 'json-schema';
@@ -23,12 +23,24 @@ export class AppComponent {
     tags.ExclusiveMaximum<100>;
 }`);
 
+  debouncedAction?: any;
+  generatedGolangStruct = '';
+
   constructor() {
     effect(() => {
       const definition = parseTS(this.sampleInterface());
       const golangStruct = toGolangStruct(definition);
       console.log(definition);
       console.log(golangStruct);
+
+      if (this.debouncedAction) {
+        clearTimeout(this.debouncedAction);
+      }
+      this.debouncedAction = setTimeout(() => {
+        const definition = parseTS(this.sampleInterface());
+        const golangStruct = toGolangStruct(definition);
+        this.generatedGolangStruct = golangStruct;
+      }, 100);
     });
   }
 }

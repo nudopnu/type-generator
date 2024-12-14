@@ -4,7 +4,7 @@ declare module tags {
    * @template T - The type of numeric value, such as 'int32', 'uint64', or 'double'.
    */
   type Type<
-    T extends 'int32' | 'uint32' | 'uint64' | 'int64' | 'float' | 'double'
+    T extends 'int8' | 'int16' | 'int32' | 'int64' | 'uint8' | 'uint16' | 'uint32' | 'uint64' | 'float32' | 'float64'
   > = {
     __type?: T;
   };
