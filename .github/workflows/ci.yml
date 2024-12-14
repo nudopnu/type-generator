@@ -25,12 +25,12 @@ jobs:
       run: npm run build:prod
 
     - name: Enable Routing
-      run: cp dist/type-generator/browser/index.html dist/type-generator/browser/404.html
+      run: cp dist/type-generator/index.html dist/type-generator/404.html
 
     - name: Deploy
       if: success()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist/type-generator/browser
+        publish_dir: dist/type-generator
         enable_jekyll: true
