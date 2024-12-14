@@ -5,13 +5,13 @@ export function tagToValidation(tag: Tag): string {
     case 'Type':
       return '';
     case 'Minimum':
-      return `gt=${tag.param}`;
-    case 'Maximum':
-      return `lt=${tag.param}`;
-    case 'ExclusiveMinimum':
       return `gte=${tag.param}`;
-    case 'ExclusiveMaximum':
+    case 'Maximum':
       return `lte=${tag.param}`;
+    case 'ExclusiveMinimum':
+      return `gt=${tag.param}`;
+    case 'ExclusiveMaximum':
+      return `lt=${tag.param}`;
     case 'MultipleOf':
       return '';
     case 'MinLength':
