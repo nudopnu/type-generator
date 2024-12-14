@@ -1,44 +1,3 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  model,
-  viewChild,
-} from '@angular/core';
-
-let tmp = true;
-
-@Component({
-  selector: 'app-monaco',
-  standalone: true,
-  imports: [],
-  template: `<div style="height:100%; width: 100%;" #editorContainer></div>`,
-})
-export class MonacoComponent implements AfterViewInit {
-  editorContainer =
-    viewChild.required<ElementRef<HTMLElement>>('editorContainer');
-
-  code = model('');
-  editor?: monaco.editor.IStandaloneCodeEditor;
-
-  ngAfterViewInit(): void {
-    this.editorContainer().nativeElement.parentElement!.style.display =
-      'contents';
-    // validation settings
-    monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: true,
-      noSyntaxValidation: false,
-    });
-
-    // compiler options
-    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-      target: monaco.languages.typescript.ScriptTarget.ES2015,
-      allowNonTsExtensions: true,
-    });
-
-    // extra libraries
-    const libSource = `
 declare module tags {
   /**
    * Represents a specific numeric type.
@@ -181,6 +140,7 @@ declare module tags {
       | 'rgb'
       | 'rgba'
       | 'ripemd128'
+      | 'ripemd160'
       | 'semver'
       | 'sha256'
       | 'sha384'
@@ -239,34 +199,4 @@ declare module tags {
   type UniqueItems = {
     __unique: true;
   };
-}
-    `;
-    var libUri = 'ts:filename/facts.d.ts';
-    monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      libSource,
-      libUri
-    );
-    // When resolving definitions and references, the editor will try to use created models.
-    // Creating a model for the library allows "peek definition/references" commands to work with the library.
-    if (tmp) {
-      monaco.editor.createModel(
-        libSource,
-        'typescript',
-        monaco.Uri.parse(libUri)
-      );
-      tmp = !tmp;
-    }
-
-    this.editor = monaco.editor.create(this.editorContainer().nativeElement, {
-      value: this.code(),
-      theme: 'vs-dark',
-      wordWrap: 'on',
-      wrappingIndent: 'indent',
-      language: 'typescript',
-      automaticLayout: true,
-    });
-    this.editor.onDidChangeModelContent((_) => {
-      this.code.set(this.editor!.getModel()!.getValue());
-    });
-  }
 }

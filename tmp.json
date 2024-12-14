@@ -1,0 +1,178 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "TSInterfaceDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "User"
+            },
+            "body": {
+                "type": "TSInterfaceBody",
+                "body": [
+                    {
+                        "type": "TSPropertySignature",
+                        "computed": false,
+                        "key": {
+                            "type": "Identifier",
+                            "name": "id"
+                        },
+                        "typeAnnotation": {
+                            "type": "TSTypeAnnotation",
+                            "typeAnnotation": {
+                                "type": "TSIntersectionType",
+                                "types": [
+                                    {
+                                        "type": "TSStringKeyword"
+                                    },
+                                    {
+                                        "type": "TSTypeReference",
+                                        "typeName": {
+                                            "type": "TSQualifiedName",
+                                            "left": {
+                                                "type": "Identifier",
+                                                "name": "tags"
+                                            },
+                                            "right": {
+                                                "type": "Identifier",
+                                                "name": "Format"
+                                            }
+                                        },
+                                        "typeParameters": {
+                                            "type": "TSTypeParameterInstantiation",
+                                            "params": [
+                                                {
+                                                    "type": "TSLiteralType",
+                                                    "literal": {
+                                                        "type": "Literal",
+                                                        "value": "uuid",
+                                                        "raw": "\"uuid\""
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "type": "TSPropertySignature",
+                        "computed": false,
+                        "key": {
+                            "type": "Identifier",
+                            "name": "name"
+                        },
+                        "typeAnnotation": {
+                            "type": "TSTypeAnnotation",
+                            "typeAnnotation": {
+                                "type": "TSStringKeyword"
+                            }
+                        }
+                    },
+                    {
+                        "type": "TSPropertySignature",
+                        "computed": false,
+                        "key": {
+                            "type": "Identifier",
+                            "name": "age"
+                        },
+                        "typeAnnotation": {
+                            "type": "TSTypeAnnotation",
+                            "typeAnnotation": {
+                                "type": "TSIntersectionType",
+                                "types": [
+                                    {
+                                        "type": "TSNumberKeyword"
+                                    },
+                                    {
+                                        "type": "TSTypeReference",
+                                        "typeName": {
+                                            "type": "TSQualifiedName",
+                                            "left": {
+                                                "type": "Identifier",
+                                                "name": "tags"
+                                            },
+                                            "right": {
+                                                "type": "Identifier",
+                                                "name": "Type"
+                                            }
+                                        },
+                                        "typeParameters": {
+                                            "type": "TSTypeParameterInstantiation",
+                                            "params": [
+                                                {
+                                                    "type": "TSLiteralType",
+                                                    "literal": {
+                                                        "type": "Literal",
+                                                        "value": "uint32",
+                                                        "raw": "\"uint32\""
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "type": "TSTypeReference",
+                                        "typeName": {
+                                            "type": "TSQualifiedName",
+                                            "left": {
+                                                "type": "Identifier",
+                                                "name": "tags"
+                                            },
+                                            "right": {
+                                                "type": "Identifier",
+                                                "name": "Minimum"
+                                            }
+                                        },
+                                        "typeParameters": {
+                                            "type": "TSTypeParameterInstantiation",
+                                            "params": [
+                                                {
+                                                    "type": "TSLiteralType",
+                                                    "literal": {
+                                                        "type": "Literal",
+                                                        "value": 20,
+                                                        "raw": "20"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "type": "TSTypeReference",
+                                        "typeName": {
+                                            "type": "TSQualifiedName",
+                                            "left": {
+                                                "type": "Identifier",
+                                                "name": "tags"
+                                            },
+                                            "right": {
+                                                "type": "Identifier",
+                                                "name": "ExclusiveMaximum"
+                                            }
+                                        },
+                                        "typeParameters": {
+                                            "type": "TSTypeParameterInstantiation",
+                                            "params": [
+                                                {
+                                                    "type": "TSLiteralType",
+                                                    "literal": {
+                                                        "type": "Literal",
+                                                        "value": 100,
+                                                        "raw": "100"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "sourceType": "module"
+}
